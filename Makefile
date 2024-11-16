@@ -80,19 +80,10 @@ mod-tidy:
 	$(GOMOD) tidy
 	$(GOMOD) verify
 
-# Install development tools
-install-tools:
-	@echo "$(GREEN)Installing development tools...$(NC)"
-	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(shell go env GOPATH)/bin
-	$(GOGET) -u golang.org/x/tools/cmd/...
-
 # Verify project setup
 check: mod-tidy lint fmt
 	@echo "$(GREEN)All checks passed!$(NC)"
 
-# Run full CI pipeline locally
-ci: check test cover
-	@echo "$(GREEN)CI pipeline completed successfully!$(NC)"
 
 # Show help
 help:
@@ -106,9 +97,7 @@ help:
 	@echo "  $(GREEN)lint$(NC)          - Run linter"
 	@echo "  $(GREEN)fmt$(NC)           - Format code"
 	@echo "  $(GREEN)mod-tidy$(NC)      - Update dependencies"
-	@echo "  $(GREEN)install-tools$(NC) - Install development tools"
 	@echo "  $(GREEN)check$(NC)         - Verify project setup"
-	@echo "  $(GREEN)ci$(NC)            - Run full CI pipeline locally"
 	@echo "  $(GREEN)help$(NC)          - Show this help message"
 
 # Default target
